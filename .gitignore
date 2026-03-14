@@ -31,4 +31,3 @@ psalm.xml
 testbench.yaml
 /docs
 /coverage
-/.reference-files
