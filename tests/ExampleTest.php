@@ -1,9 +1,10 @@
 <?php
 
+use Grezlikowski\PageSpeed\PageSpeedServiceProvider;
 use Grezlikowski\PageSpeed\Services\PageSpeedApiService;
 
 it('registers the service provider', function () {
-    expect(app()->getProviders(\Grezlikowski\PageSpeed\PageSpeedServiceProvider::class))
+    expect(app()->getProviders(PageSpeedServiceProvider::class))
         ->not->toBeEmpty();
 });
 

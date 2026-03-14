@@ -1,6 +1,7 @@
 <?php
 
 use Grezlikowski\PageSpeed\Models\PageSpeedTest;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 it('can create a page speed test', function () {
     $test = PageSpeedTest::create([
@@ -111,7 +112,7 @@ it('allows nullable scores', function () {
 it('has a user relationship', function () {
     $test = new PageSpeedTest;
 
-    expect($test->user())->toBeInstanceOf(\Illuminate\Database\Eloquent\Relations\BelongsTo::class);
+    expect($test->user())->toBeInstanceOf(BelongsTo::class);
 });
 
 it('can store and retrieve with user_id', function () {
