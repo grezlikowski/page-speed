@@ -14,10 +14,71 @@ You can install the package via composer:
 composer require grezlikowski/page-speed-with-history
 ```
 
+Publish the config file and migration:
+
+```bash
+php artisan vendor:publish --tag="page-speed-config"
+php artisan vendor:publish --tag="page-speed-migrations"
+php artisan migrate
+```
+
+Add your Google PageSpeed Insights API key to `.env`:
+
+```env
+GOOGLE_PAGESPEED_API_KEY=your-api-key-here
+```
+
 ## Usage
 
+Visit `/page-speed` in your browser. By default, the panel is only accessible in `local` environment.
+
+### Authorization
+
+To control access in production, define authorization logic in your `AppServiceProvider`:
+
 ```php
-$pageSpeed = new Grezlikowski\PageSpeed\PageSpeedClass();
+use Grezlikowski\PageSpeed\PageSpeedPanel;
+
+public function boot(): void
+{
+    PageSpeedPanel::auth(function ($request) {
+        return in_array($request->user()?->email, [
+            'admin@example.com',
+        ]);
+    });
+}
+```
+
+Or check for a role/permission:
+
+```php
+PageSpeedPanel::auth(function ($request) {
+    return $request->user()?->hasRole('administrator');
+});
+```
+
+### Configuration
+
+You can customize the panel path, middleware, and other settings in `config/page-speed.php`:
+
+```php
+return [
+    'api_key' => env('GOOGLE_PAGESPEED_API_KEY', ''),
+    'path' => env('PAGESPEED_PATH', 'page-speed'),
+    'middleware' => ['web'],
+    'default_strategy' => 'mobile',
+    'history_limit' => 50,
+    'timeout' => 60,
+    'enabled' => env('PAGESPEED_ENABLED', true),
+];
+```
+
+### Publishing Views
+
+To customize the views:
+
+```bash
+php artisan vendor:publish --tag="page-speed-views"
 ```
 
 ## Testing
