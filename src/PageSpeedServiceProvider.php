@@ -2,7 +2,6 @@
 
 namespace Grezlikowski\PageSpeed;
 
-use Grezlikowski\PageSpeed\Console\InstallCommand;
 use Grezlikowski\PageSpeed\Http\Middleware\Authorize;
 use Grezlikowski\PageSpeed\Services\PageSpeedApiService;
 use Illuminate\Support\Facades\Route;
@@ -22,7 +21,6 @@ class PageSpeedServiceProvider extends ServiceProvider
         $this->registerRoutes();
         $this->registerResources();
         $this->registerPublishing();
-        $this->registerCommands();
         $this->loadMigrationsFrom(__DIR__.'/../database/migrations');
     }
 
@@ -49,15 +47,6 @@ class PageSpeedServiceProvider extends ServiceProvider
         $this->loadViewsFrom(__DIR__.'/../resources/views', 'page-speed');
     }
 
-    private function registerCommands(): void
-    {
-        if ($this->app->runningInConsole()) {
-            $this->commands([
-                InstallCommand::class,
-            ]);
-        }
-    }
-
     private function registerPublishing(): void
     {
         if (! $this->app->runningInConsole()) {
@@ -67,10 +56,6 @@ class PageSpeedServiceProvider extends ServiceProvider
         $this->publishes([
             __DIR__.'/../config/page-speed.php' => config_path('page-speed.php'),
         ], 'page-speed-config');
-
-        $this->publishesMigrations([
-            __DIR__.'/../database/migrations' => database_path('migrations'),
-        ], 'page-speed-migrations');
 
         $this->publishes([
             __DIR__.'/../resources/views' => resource_path('views/vendor/page-speed'),

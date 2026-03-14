@@ -14,11 +14,9 @@ You can install the package via composer:
 composer require grezlikowski/page-speed-with-history
 ```
 
-Publish the config file and migration:
+Run migrations:
 
 ```bash
-php artisan vendor:publish --tag="page-speed-config"
-php artisan vendor:publish --tag="page-speed-migrations"
 php artisan migrate
 ```
 
@@ -26,6 +24,22 @@ Add your Google PageSpeed Insights API key to `.env`:
 
 ```env
 GOOGLE_PAGESPEED_API_KEY=your-api-key-here
+```
+
+### Publishing
+
+Migrations run automatically without publishing. Config works out of the box thanks to `mergeConfigFrom`. You can optionally publish assets to customize them:
+
+**Config:**
+
+```bash
+php artisan vendor:publish --tag="page-speed-config"
+```
+
+**Views:**
+
+```bash
+php artisan vendor:publish --tag="page-speed-views"
 ```
 
 ## Usage
@@ -71,14 +85,6 @@ return [
     'timeout' => 60,
     'enabled' => env('PAGESPEED_ENABLED', true),
 ];
-```
-
-### Publishing Views
-
-To customize the views:
-
-```bash
-php artisan vendor:publish --tag="page-speed-views"
 ```
 
 ## Testing
