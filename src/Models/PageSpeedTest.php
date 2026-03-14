@@ -31,5 +31,4 @@ class PageSpeedTest extends Model
             'seo_score' => 'integer',
         ];
     }
-
 }
