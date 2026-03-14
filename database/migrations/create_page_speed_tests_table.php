@@ -4,8 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-return new class extends Migration
-{
+return new class () extends Migration {
     public function up(): void
     {
         Schema::create('page_speed_tests', function (Blueprint $table) {
@@ -18,7 +17,6 @@ return new class extends Migration
             $table->unsignedTinyInteger('seo_score')->nullable();
             $table->json('metrics')->nullable();
             $table->json('raw_response')->nullable();
-            $table->foreignId('user_id')->nullable()->constrained('users')->onDelete('set null');
             $table->timestamps();
 
             $table->index(['url', 'strategy', 'created_at']);
