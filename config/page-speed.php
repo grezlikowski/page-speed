@@ -99,6 +99,19 @@ return [
 
     /*
     |--------------------------------------------------------------------------
+    | Gate
+    |--------------------------------------------------------------------------
+    |
+    | This gate determines who can access the PageSpeed panel. By default,
+    | access is open to all authenticated users. You may define a gate
+    | named "viewPageSpeed" in your AuthServiceProvider to restrict access.
+    |
+    */
+
+    'gate' => 'viewPageSpeed',
+
+    /*
+    |--------------------------------------------------------------------------
     | Enabled
     |--------------------------------------------------------------------------
     |

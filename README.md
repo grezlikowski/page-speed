@@ -44,11 +44,33 @@ php artisan vendor:publish --tag="page-speed-views"
 
 ## Usage
 
-Visit `/page-speed` in your browser. By default, the panel is only accessible in `local` environment.
+Visit `/page-speed` in your browser. By default, the panel is accessible to everyone.
 
 ### Authorization
 
-To control access in production, define authorization logic in your `AppServiceProvider`:
+You can restrict access to the panel using a Laravel Gate. Define a `viewPageSpeed` gate in your `AppServiceProvider`:
+
+```php
+use Illuminate\Support\Facades\Gate;
+
+public function boot(): void
+{
+    Gate::define('viewPageSpeed', function ($user) {
+        return $user->is_admin;
+    });
+}
+```
+
+If the `viewPageSpeed` gate is not defined, the panel is open to all users.
+
+You can also change the gate name in the config:
+
+```php
+// config/page-speed.php
+'gate' => 'myCustomGate',
+```
+
+Alternatively, use a custom callback via `PageSpeedPanel::auth()` in your `AppServiceProvider`:
 
 ```php
 use Grezlikowski\PageSpeed\PageSpeedPanel;
@@ -56,20 +78,12 @@ use Grezlikowski\PageSpeed\PageSpeedPanel;
 public function boot(): void
 {
     PageSpeedPanel::auth(function ($request) {
-        return in_array($request->user()?->email, [
-            'admin@example.com',
-        ]);
+        return $request->user()?->hasRole('administrator');
     });
 }
 ```
 
-Or check for a role/permission:
-
-```php
-PageSpeedPanel::auth(function ($request) {
-    return $request->user()?->hasRole('administrator');
-});
-```
+When a custom callback is registered via `PageSpeedPanel::auth()`, it takes priority over the gate.
 
 ### Configuration
 
@@ -83,6 +97,7 @@ return [
     'default_strategy' => 'mobile',
     'history_limit' => 50,
     'timeout' => 60,
+    'gate' => 'viewPageSpeed',
     'enabled' => env('PAGESPEED_ENABLED', true),
 ];
 ```

@@ -13,7 +13,8 @@ class PageSpeedController extends Controller
 {
     public function __construct(
         private readonly PageSpeedApiService $pageSpeedService,
-    ) {}
+    ) {
+    }
 
     /**
      * Display the PageSpeed dashboard.
@@ -64,7 +65,6 @@ class PageSpeedController extends Controller
                 $validated['url'],
                 [$validated['strategy']],
                 $validated['categories'] ?? [],
-                $request->user()?->id,
             );
 
             $lastTest = end($results);

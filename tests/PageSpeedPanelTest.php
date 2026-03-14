@@ -10,10 +10,9 @@ it('has null auth callback by default', function () {
     expect(PageSpeedPanel::$authUsing)->toBeNull();
 });
 
-it('default behavior checks for local environment', function () {
-    // Default callback returns app()->environment('local').
-    // Testbench runs in 'testing' env, so default should deny.
-    expect(PageSpeedPanel::check(request()))->toBeFalse();
+it('default behavior allows access when no gate is defined', function () {
+    // No gate defined, no custom auth - default should allow access.
+    expect(PageSpeedPanel::check(request()))->toBeTrue();
 });
 
 it('registers custom auth callback', function () {

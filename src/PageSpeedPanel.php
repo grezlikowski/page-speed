@@ -3,6 +3,7 @@
 namespace Grezlikowski\PageSpeed;
 
 use Closure;
+use Illuminate\Support\Facades\Gate;
 
 class PageSpeedPanel
 {
@@ -22,7 +23,7 @@ class PageSpeedPanel
     {
         static::$authUsing = $callback;
 
-        return new static;
+        return new static();
     }
 
     /**
@@ -30,8 +31,16 @@ class PageSpeedPanel
      */
     public static function check(mixed $request): bool
     {
-        return (static::$authUsing ?: function () {
-            return app()->environment('local');
-        })($request);
+        if (static::$authUsing) {
+            return (static::$authUsing)($request);
+        }
+
+        $gate = config('page-speed.gate', 'viewPageSpeed');
+
+        if (Gate::has($gate)) {
+            return Gate::check($gate);
+        }
+
+        return true;
     }
 }

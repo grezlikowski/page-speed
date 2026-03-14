@@ -122,7 +122,7 @@ class PageSpeedApiService
 
             $uri = $route->uri();
 
-            if (str_starts_with($uri, '_') || str_starts_with($uri, 'api/') || str_starts_with($uri, 'sanctum/')) {
+            if (str_starts_with($uri, '_') || str_starts_with($uri, 'api/') || str_starts_with($uri, 'sanctum/') || str_starts_with($uri, 'page-speed')) {
                 continue;
             }
 
@@ -131,6 +131,10 @@ class PageSpeedApiService
             }
 
             if ($uri === '/' || $uri === '') {
+                continue;
+            }
+
+            if (str_contains($uri, '/')) {
                 continue;
             }
 
