@@ -41,10 +41,10 @@ class PageSpeedApiService
 
         foreach ($categoriesToTest as $category) {
             $apiValue = self::CATEGORY_MAP[$category] ?? strtoupper(str_replace('-', '_', $category));
-            $query .= '&category=' . urlencode($apiValue);
+            $query .= '&category='.urlencode($apiValue);
         }
 
-        $response = Http::timeout($timeout)->get(self::API_URL . '?' . $query);
+        $response = Http::timeout($timeout)->get(self::API_URL.'?'.$query);
 
         if ($response->failed()) {
             $error = $response->json('error.message', 'Unknown error');
@@ -109,7 +109,7 @@ class PageSpeedApiService
         $appUrl = rtrim(config('app.url', 'http://localhost'), '/');
 
         $urls[] = [
-            'url' => $appUrl . '/',
+            'url' => $appUrl.'/',
             'label' => 'Homepage (/)',
         ];
 
@@ -138,7 +138,7 @@ class PageSpeedApiService
             $label = $name ? "{$name} (/{$uri})" : "/{$uri}";
 
             $urls[] = [
-                'url' => $appUrl . '/' . ltrim($uri, '/'),
+                'url' => $appUrl.'/'.ltrim($uri, '/'),
                 'label' => $label,
             ];
         }
@@ -147,7 +147,7 @@ class PageSpeedApiService
         if ($defaultUrl && ! collect($urls)->contains('url', $defaultUrl)) {
             array_unshift($urls, [
                 'url' => $defaultUrl,
-                'label' => 'Default (' . $defaultUrl . ')',
+                'label' => 'Default ('.$defaultUrl.')',
             ]);
         }
 
@@ -254,12 +254,12 @@ class PageSpeedApiService
 
             return [
                 'type' => $type,
-                'headings' => array_map(fn(array $h) => [
+                'headings' => array_map(fn (array $h) => [
                     'key' => $h['key'] ?? '',
                     'label' => $h['label'] ?? $h['text'] ?? '',
                     'valueType' => $h['valueType'] ?? 'text',
                 ], $headings),
-                'items' => array_slice(array_map(fn(array $item) => $this->formatDetailItem($item, $headings), $items), 0, 20),
+                'items' => array_slice(array_map(fn (array $item) => $this->formatDetailItem($item, $headings), $items), 0, 20),
                 'overallSavingsMs' => $details['overallSavingsMs'] ?? null,
                 'overallSavingsBytes' => $details['overallSavingsBytes'] ?? null,
             ];

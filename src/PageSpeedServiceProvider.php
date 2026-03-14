@@ -11,7 +11,7 @@ class PageSpeedServiceProvider extends ServiceProvider
 {
     public function register(): void
     {
-        $this->mergeConfigFrom(__DIR__ . '/../config/page-speed.php', 'page-speed');
+        $this->mergeConfigFrom(__DIR__.'/../config/page-speed.php', 'page-speed');
 
         $this->app->singleton(PageSpeedApiService::class);
     }
@@ -37,13 +37,13 @@ class PageSpeedServiceProvider extends ServiceProvider
                 [Authorize::class],
             ),
         ], function () {
-            $this->loadRoutesFrom(__DIR__ . '/../routes/web.php');
+            $this->loadRoutesFrom(__DIR__.'/../routes/web.php');
         });
     }
 
     private function registerResources(): void
     {
-        $this->loadViewsFrom(__DIR__ . '/../resources/views', 'page-speed');
+        $this->loadViewsFrom(__DIR__.'/../resources/views', 'page-speed');
     }
 
     private function registerPublishing(): void
@@ -53,15 +53,15 @@ class PageSpeedServiceProvider extends ServiceProvider
         }
 
         $this->publishes([
-            __DIR__ . '/../config/page-speed.php' => config_path('page-speed.php'),
+            __DIR__.'/../config/page-speed.php' => config_path('page-speed.php'),
         ], 'page-speed-config');
 
         $this->publishesMigrations([
-            __DIR__ . '/../database/migrations' => database_path('migrations'),
+            __DIR__.'/../database/migrations' => database_path('migrations'),
         ], 'page-speed-migrations');
 
         $this->publishes([
-            __DIR__ . '/../resources/views' => resource_path('views/vendor/page-speed'),
+            __DIR__.'/../resources/views' => resource_path('views/vendor/page-speed'),
         ], 'page-speed-views');
     }
 }

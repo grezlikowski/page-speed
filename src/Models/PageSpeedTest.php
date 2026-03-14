@@ -4,6 +4,7 @@ namespace Grezlikowski\PageSpeed\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Foundation\Auth\User;
 
 class PageSpeedTest extends Model
 {
@@ -35,7 +36,7 @@ class PageSpeedTest extends Model
     }
 
     /**
-     * @return BelongsTo<\Illuminate\Foundation\Auth\User, $this>
+     * @return BelongsTo<User, $this>
      */
     public function user(): BelongsTo
     {

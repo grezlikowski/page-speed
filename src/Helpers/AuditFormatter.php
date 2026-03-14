@@ -11,23 +11,23 @@ class AuditFormatter
             return '0 B';
         }
         if ($n < 1024) {
-            return round($n) . ' B';
+            return round($n).' B';
         }
         if ($n < 1024 * 1024) {
-            return number_format($n / 1024, 1) . ' KiB';
+            return number_format($n / 1024, 1).' KiB';
         }
 
-        return number_format($n / (1024 * 1024), 1) . ' MiB';
+        return number_format($n / (1024 * 1024), 1).' MiB';
     }
 
     public static function formatMs(mixed $ms): string
     {
         $n = (float) $ms;
         if ($n < 1000) {
-            return round($n) . ' ms';
+            return round($n).' ms';
         }
 
-        return number_format($n / 1000, 1) . ' s';
+        return number_format($n / 1000, 1).' s';
     }
 
     public static function formatCellValue(mixed $value, string $valueType): string
