@@ -135,18 +135,6 @@ it('returns empty array when raw_response is null', function () {
     expect($this->service->extractAudits($test))->toBe([]);
 });
 
-it('stores user_id when provided', function () {
-    Http::fake([
-        'www.googleapis.com/pagespeedonline/*' => Http::response(fakePageSpeedResponse()),
-    ]);
-
-    config()->set('page-speed.api_key', 'fake-key');
-
-    $result = $this->service->runTest('https://example.com', 'mobile', [], 42);
-
-    expect($result->user_id)->toBe(42);
-});
-
 /**
  * Generate a fake PageSpeed API response for testing.
  */

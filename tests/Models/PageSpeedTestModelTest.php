@@ -1,7 +1,6 @@
 <?php
 
 use Grezlikowski\PageSpeed\Models\PageSpeedTest;
-use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 it('can create a page speed test', function () {
     $test = PageSpeedTest::create([
@@ -39,7 +38,6 @@ it('has correct fillable attributes', function () {
         'seo_score',
         'metrics',
         'raw_response',
-        'user_id',
     ]);
 });
 
@@ -107,22 +105,6 @@ it('allows nullable scores', function () {
         ->and($test->accessibility_score)->toBeNull()
         ->and($test->best_practices_score)->toBeNull()
         ->and($test->seo_score)->toBeNull();
-});
-
-it('has a user relationship', function () {
-    $test = new PageSpeedTest;
-
-    expect($test->user())->toBeInstanceOf(BelongsTo::class);
-});
-
-it('can store and retrieve with user_id', function () {
-    $test = PageSpeedTest::create([
-        'url' => 'https://example.com',
-        'strategy' => 'mobile',
-        'user_id' => null,
-    ]);
-
-    expect($test->user_id)->toBeNull();
 });
 
 it('uses the correct table', function () {

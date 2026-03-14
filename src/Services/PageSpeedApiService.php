@@ -26,7 +26,7 @@ class PageSpeedApiService
      *
      * @param  array<int, string>  $categories
      */
-    public function runTest(string $url, string $strategy, array $categories = [], ?int $userId = null): PageSpeedTest
+    public function runTest(string $url, string $strategy, array $categories = []): PageSpeedTest
     {
         $apiKey = $this->getApiKey();
         $categoriesToTest = ! empty($categories) ? $categories : array_keys(self::CATEGORY_MAP);
@@ -54,7 +54,7 @@ class PageSpeedApiService
 
         $data = $response->json();
 
-        return $this->storeResult($data, $url, $strategy, $userId);
+        return $this->storeResult($data, $url, $strategy);
     }
 
     /**
@@ -64,12 +64,12 @@ class PageSpeedApiService
      * @param  array<int, string>  $categories
      * @return array<int, PageSpeedTest>
      */
-    public function runTests(string $url, array $strategies, array $categories = [], ?int $userId = null): array
+    public function runTests(string $url, array $strategies, array $categories = []): array
     {
         $results = [];
 
         foreach ($strategies as $strategy) {
-            $results[] = $this->runTest($url, $strategy, $categories, $userId);
+            $results[] = $this->runTest($url, $strategy, $categories);
         }
 
         return $results;
@@ -212,7 +212,7 @@ class PageSpeedApiService
     /**
      * @param  array<string, mixed>  $data
      */
-    private function storeResult(array $data, string $url, string $strategy, ?int $userId): PageSpeedTest
+    private function storeResult(array $data, string $url, string $strategy): PageSpeedTest
     {
         $categories = $data['lighthouseResult']['categories'] ?? [];
         $audits = $data['lighthouseResult']['audits'] ?? [];
@@ -232,7 +232,6 @@ class PageSpeedApiService
                 'speed_index' => ($audits['speed-index']['numericValue'] ?? 0) / 1000,
             ],
             'raw_response' => $data,
-            'user_id' => $userId,
         ]);
     }
 

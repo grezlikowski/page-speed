@@ -3,8 +3,6 @@
 namespace Grezlikowski\PageSpeed\Models;
 
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\Relations\BelongsTo;
-use Illuminate\Foundation\Auth\User;
 
 class PageSpeedTest extends Model
 {
@@ -17,7 +15,6 @@ class PageSpeedTest extends Model
         'seo_score',
         'metrics',
         'raw_response',
-        'user_id',
     ];
 
     /**
@@ -35,11 +32,4 @@ class PageSpeedTest extends Model
         ];
     }
 
-    /**
-     * @return BelongsTo<User, $this>
-     */
-    public function user(): BelongsTo
-    {
-        return $this->belongsTo(config('auth.providers.users.model', 'App\\Models\\User'));
-    }
 }
