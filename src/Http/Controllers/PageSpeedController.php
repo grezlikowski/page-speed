@@ -13,8 +13,7 @@ class PageSpeedController extends Controller
 {
     public function __construct(
         private readonly PageSpeedApiService $pageSpeedService,
-    ) {
-    }
+    ) {}
 
     /**
      * Display the PageSpeed dashboard.

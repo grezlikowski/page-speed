@@ -23,7 +23,7 @@ class PageSpeedPanel
     {
         static::$authUsing = $callback;
 
-        return new static();
+        return new static;
     }
 
     /**

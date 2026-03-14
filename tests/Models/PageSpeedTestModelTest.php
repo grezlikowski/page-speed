@@ -27,7 +27,7 @@ it('can create a page speed test', function () {
 });
 
 it('has correct fillable attributes', function () {
-    $model = new PageSpeedTest();
+    $model = new PageSpeedTest;
 
     expect($model->getFillable())->toBe([
         'url',
@@ -108,7 +108,7 @@ it('allows nullable scores', function () {
 });
 
 it('uses the correct table', function () {
-    $test = new PageSpeedTest();
+    $test = new PageSpeedTest;
 
     expect($test->getTable())->toBe('page_speed_tests');
 });
