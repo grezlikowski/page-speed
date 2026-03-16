@@ -1,8 +1,8 @@
 # PageSpeed with History
 
-[![Latest Version on Packagist](https://img.shields.io/packagist/v/grezlikowski/page-speed-with-history.svg?style=flat-square)](https://packagist.org/packages/grezlikowski/page-speed-with-history)
-[![Tests](https://img.shields.io/github/actions/workflow/status/grezlikowski/page-speed-with-history/run-tests.yml?branch=main&label=tests&style=flat-square)](https://github.com/grezlikowski/page-speed-with-history/actions/workflows/run-tests.yml)
-[![Total Downloads](https://img.shields.io/packagist/dt/grezlikowski/page-speed-with-history.svg?style=flat-square)](https://packagist.org/packages/grezlikowski/page-speed-with-history)
+[![Latest Version on Packagist](https://img.shields.io/packagist/v/grezlikowski/page-speed.svg?style=flat-square)](https://packagist.org/packages/grezlikowski/page-speed)
+[![Tests](https://img.shields.io/github/actions/workflow/status/grezlikowski/page-speed/run-tests.yml?branch=main&label=tests&style=flat-square)](https://github.com/grezlikowski/page-speed/actions/workflows/run-tests.yml)
+[![Total Downloads](https://img.shields.io/packagist/dt/grezlikowski/page-speed.svg?style=flat-square)](https://packagist.org/packages/grezlikowski/page-speed)
 
 PageSpeed with History is a PHP package that provides a convenient way to track and analyze the performance of web pages over time. It allows developers to monitor page speed metrics, identify performance bottlenecks, and optimize their websites for better user experience.
 
@@ -11,7 +11,7 @@ PageSpeed with History is a PHP package that provides a convenient way to track 
 You can install the package via composer:
 
 ```bash
-composer require grezlikowski/page-speed-with-history
+composer require grezlikowski/page-speed
 ```
 
 Run migrations:

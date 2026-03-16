@@ -2,7 +2,7 @@
 
 namespace Grezlikowski\PageSpeed;
 
-class PageSpeedWithHistoryClass
+class PageSpeedClass
 {
     /**
      * Get the package version.
