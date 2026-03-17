@@ -2,6 +2,12 @@
 
 All notable changes to `page-speed` will be documented in this file.
 
+## 1.1.0 - 2026-03-17
+
+### Added
+
+- Added support for Laravel 13
+
 ## 1.0.0 - 2026-03-16
 
 ### First stable release
